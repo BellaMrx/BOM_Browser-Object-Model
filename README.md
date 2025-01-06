@@ -44,3 +44,17 @@ Example:
   ```
 
   <img src="images/BOM_Part_1.png" width="900">
+
+
+### Change the size and position of a browser window
+It is also possible to change the size and position of a browser window on the screen. The `window` object offers various methods for this purpose:
+
+| Method              | Description  |
+| ------------------- | ------------ | 
+| `moveBy()` |  |
+| `moveTo()` |  |
+| `resizeBy()` |  |
+| `resizeTo()` |  |
+| `scroll()` |  |
+| `scrollBy()` |  |
+| `scrollTo()` |  |
