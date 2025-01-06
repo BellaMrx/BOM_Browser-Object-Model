@@ -34,11 +34,11 @@ There is a whole range of properties for determining the size and position of a 
 
 Example:
    
- [Complete code - Part_1 - click here](https://github.com/BellaMrx/Forms_in_JavaScript/tree/main/Forms/Part_1)
+ [Complete code - Part_1 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_1)
 
   ```
     console.log(window.innerHeight);        // 611
-    console.log(window.innerWidth);         // 700
+    console.log(window.innerWidth);         // 780
     console.log(window.screenX);            // -7
     console.log(window.screenY);            // -7
   ```
