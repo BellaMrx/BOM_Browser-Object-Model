@@ -51,10 +51,30 @@ It is also possible to change the size and position of a browser window on the s
 
 | Method              | Description  |
 | ------------------- | ------------ | 
-| `moveBy()` |  |
-| `moveTo()` |  |
-| `resizeBy()` |  |
-| `resizeTo()` |  |
-| `scroll()` |  |
-| `scrollBy()` |  |
-| `scrollTo()` |  |
+| `moveBy()` | Moves the current browser window horizontally and vertically by a certain number of pixels. The first parameter determines the horizontal shift in pixels, the second parameter the vertical shift. |
+| `moveTo()` | Moves the current browser window horizontally and vertically to a specific position. The first parameter determines the horizontal position in pixels, the second parameter the vertical position. |
+| `resizeBy()` | Scales the current browser window horizontally and vertically by a certain number of pixels. The first parameter determines the horizontal scaling value, the second parameter the vertical scaling value. |
+| `resizeTo()` | Scales the current browser window horizontally and vertically to a specific size. The first parameter determines the width, the second parameter the height. |
+| `scroll()` | Scrolls the window content to a specific position. The first parameter specifies the horizontal position, the second parameter the vertical position. |
+| `scrollBy()` | Scrolls the window content by a certain factor. The first parameter specifies the horizontal scroll factor, the second parameter the vertical scroll factor. |
+| `scrollTo()` | Scrolls the window content to a specific position. The first parameter specifies the horizontal position, the second parameter the vertical position. |
+
+Example:
+   
+ [Complete code - Part_2 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_2)
+
+  ```
+    // Move browser window by 200 pixels horizontally and vertically
+    window.moveBy(200, 200);
+    // Move browser window to position (200, 200)
+    window.moveTo(200, 200);
+    // Enlarge browser window by 200 pixels in width and height
+    window.resizeBy(200, 200);
+    // Reduce browser window by 200 pixels in width and height
+    window.resizeBy(-200, -200);
+    // Move browser content by 200 pixels horizontally and vertically
+    window.scrollBy(200, 200);
+    // Move browser content to position (200, 200)
+    window.scrollTo(200, 200);
+  ```
+
