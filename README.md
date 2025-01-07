@@ -126,4 +126,26 @@ The `open()` method is available for opening a new browser window:
 The URL of the website to be opened in the new window is passed to the method as the first argument. The name of the new window can optionally be specified as the second argument (not the name of the website). The third argument can also be used to influence the appearance and behavior of the window. A character string consisting of properties can be transferred here. The value of the respective property is written directly after the property using an equal sign `=`; several property-value pairs are separated by a comma.
 In the example, a browser window with a width of 600 pixels (property `width`) and a height of 400 pixels (property `height`) is created in this way, which is resizable (property `resizable`) and has scrollbars and a status bar (properties `scrollbars` and `status`). The values `yes` and `no` (for `resizable`) and `1` and `0` (for `scrollbar`) are permitted for `scrollbars` and `status` and generally for those that can only assume one of two states. Alternatively, the value can also be omitted, in which case the presence of the property name is evaluated as `yes` or `1` (in the example here for `status`).
 
-  <img src="images/BOM_Part_2.png" width="800">
+  <img src="images/BOM_Part_3.png" width="800">
+
+Selected parameters for opening browser windows:
+
+| Parameters     | Meaning      |
+| -------------- | ------------ | 
+| `height` | the height of the new browser window in pixels |
+| `innerHeight` | the height of the display area of the new browser window in pixels |
+| `innerWidth` | the width of the display area of the new browser window in pixels  |
+| `left` | Distance from the top left corner of the new browser window to the left edge of the screen in pixels |
+| `location` | Indication of whether the new browser window should have an address bar or not |
+| `menubar` | Indication of whether the new browser window should have a menu bar or not  |
+| `resizable` | Information on whether the new browser window can be resized or not |
+| `screenX` | Distance from the top left corner of the new browser window to the left edge of the screen in pixels  |
+| `screenY` | Distance from the top left corner of the new browser window to the top edge of the screen in pixels  |
+| `scrollbars` | Specification of whether the new browser window should have a scrollbar or not   |
+| `status` | Specification of whether the new browser window should have a status bar or not |
+| `toolbar` | Specification of whether the new browser window should have a toolbar or not |
+| `top` | Distance from the top left corner of the new browser window to the top edge of the screen in pixels |
+| `width` | the width of the new browser window in pixels |
+
+
+### Close the browser window
