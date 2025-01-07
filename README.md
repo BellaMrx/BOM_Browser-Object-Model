@@ -78,3 +78,52 @@ Example:
     window.scrollTo(200, 200);
   ```
 
+
+### Access display information of the browser bars
+A browser window usually consists of various components. In addition to the content area, in which the respective website is displayed, there is also the address bar, in which the URL can be entered. A status bar, which informs you, among other things, whether a web page has been loaded or is currently loading. These components also include the menu bar, the toolbar, bookmarks and scrollbars, which show the horizontal and vertical position of the respective web page.
+
+| Property            | Description  |
+| ------------------- | ------------ |
+| `locationbar` | Contains a reference to an object that provides information on whether the address bar is displayed or not. |
+| `menubar` | Contains a reference to an object that provides information on whether the menu bar is displayed or not. |
+| `personalbar` | Contains a reference to an object that provides information on whether the personal bar (e.g. the bookmark bar) is displayed or not. |
+| `scrollbars` | Contains a reference to an object that provides information on whether the scrollbars are displayed or not.  |
+| `statusbar` | Contains a reference to an object that provides information on whether the traffic jam bar is displayed or not. |
+| `toolbar` | Contains a reference to an object that provides information on whether the toolbar is displayed or not. |
+
+
+### Determine general properties of the `window` object
+In addition to the properties presented above, there are a few more properties:
+
+| Property            | Description  |
+| ------------------- | ------------ |
+| `name` | Contains the name of the window, not the title (which is determined via `document.title`) but a name to identify the browser window as such. |
+| `opener` | If you open another browser window from a browser window using JavaScript, this property contains a reference to the original window. |
+| `self` | Contains a reference to an object that represents the current browser window. |
+
+
+### Open new browser windows
+The `open()` method is available for opening a new browser window:
+
+ [Complete code - Part_3 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_3)
+ 
+  ```
+   const linkOpen = document.getElementById('link-open');
+   linkOpen.addEventListener('click', (e) => {
+     const url = document.getElementById('url').value;
+     window.open(
+       url,                  // URL to be opened
+       'Window title',       // Title of the window
+       'width=600,' +        // Width of the window
+       'height=400,' +       // Height of the window
+       'resizable=yes,' +    // Size changes possible
+       'scrollbars=yes,' +   // Scrollbar activated
+       'status=1'            // Status bar activated
+     );
+   });
+  ```
+
+The URL of the website to be opened in the new window is passed to the method as the first argument. The name of the new window can optionally be specified as the second argument (not the name of the website). The third argument can also be used to influence the appearance and behavior of the window. A character string consisting of properties can be transferred here. The value of the respective property is written directly after the property using an equal sign `=`; several property-value pairs are separated by a comma.
+In the example, a browser window with a width of 600 pixels (property `width`) and a height of 400 pixels (property `height`) is created in this way, which is resizable (property `resizable`) and has scrollbars and a status bar (properties `scrollbars` and `status`). The values `yes` and `no` (for `resizable`) and `1` and `0` (for `scrollbar`) are permitted for `scrollbars` and `status` and generally for those that can only assume one of two states. Alternatively, the value can also be omitted, in which case the presence of the property name is evaluated as `yes` or `1` (in the example here for `status`).
+
+  <img src="images/BOM_Part_2.png" width="800">
