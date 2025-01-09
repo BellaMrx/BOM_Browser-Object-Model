@@ -105,6 +105,8 @@ In addition to the properties presented above, there are a few more properties:
 ### Open new browser windows
 The `open()` method is available for opening a new browser window:
 
+Example:
+
  [Complete code - Part_3 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_3)
  
   ```
@@ -149,3 +151,90 @@ Selected parameters for opening browser windows:
 
 
 ### Close the browser window
+In contrast to the `open()` method, the `close()` method can be used to close a browser window. 
+
+Example:
+
+ [Complete code - Part_4 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_4)
+ 
+  ```
+   let windowReference;
+   const linkOpen = document.getElementById('link-open');
+   const linkClose = document.getElementById('link-close');
+   linkOpen.addEventListener('click', (e) => {
+     const url = document.getElementById('url').value;
+     windowReference = window.open(
+       url,
+       'Window title',
+       'width=600,height=400,resizable,scrollbars=yes,status=1'
+     );
+   });
+   linkClose.addEventListener('click', (e) => {
+     windowReference.close();
+   });
+  ```
+
+This code has only been extended by a `linkClose` button, based on the previous example. The open browser window is noted in the event listener for the `linkOpen` button. Within the event listener for the `linkCClose` button, the `close()` method is called on this object, which closes the previously opened browser window.
+
+  <img src="images/BOM_Part_4.png" width="700">
+
+
+### Further methods of the `window` object
+The `window` object offers further methods. The `alert()` method can be used to open a message dialog, the `confirm()` method can be used to open a confirmation dialog and the `prompt()` method can be used to open a dialog in which a text can be entered. The `find()` method can be used to search for texts within a web page and the `print()` method can be used to print the content of the current web page.
+
+
+### Execute functions time-controlled
+If you want to execute certain functions within a web page with a time delay (once or repeatedly) at certain intervals, the `window` object offers two helper methods:
+
+| Method              | Description  |
+| ------------------- | ------------ | 
+| `setInterval()`     | Executes a function at certain intervals. Returns an ID that can be passed as a parameter to the `clearInterval()` method in order to cancel the execution of the function. |
+| `clearInterval()`   | Cancels the execution of the function that was triggered via `setInterval()`. |
+| `setTimeout()`      | Executes a function after a certain period of time. Returns an ID that can be passed as a parameter to the `clearTimeout()` method to prevent the function from being executed. |
+| `clearTimeout()`    | Cancels the execution of the function that was triggered via `setTimeout()`. |
+
+The `setTimeout()` method can be used to define the time period after which a specific function is to be executed. An anonymous function or the name of the corresponding function is passed as an argument and the time period in milliseconds after which the function is to be executed is passed as a second argument.
+
+Example:
+
+ [Complete code - Part_5 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_5)
+ 
+  ```
+   window.setTimeout(function() {
+     console.log('Hello World');
+   }, 5000);
+   window.setTimeout(() => {
+     console.log('Hello World');
+   }, 5000);
+   function printMessage() {
+     console.log('Hello World');
+   }
+   window.setTimeout(printMessage, 5000);
+  ```
+
+Here, the first call to `setTimeout()` passes an anoynme function, the second call passes an Arrow function and the third call passes the `printMessage()` function. All three calls ensure that the passed function is executed after 5000 milliseconds (5s) and the message `Hello World` is displayed on the console.
+
+Analogous to the `setTimeout` method, there is also the `setInterval()` method, which can be used to execute a function at certain intervals. Here too, either an anonymous function or the name of the function to be executed is passed as an argument, and the interval in milliseconds in which the function is to be executed is passed as the time argument.
+
+Example:
+
+ [Complete code - Part_6 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_6)
+ 
+  ```
+   window.setInterval(function() {
+     console.log('Hello World');
+   }, 5000);
+   windowsetInterval(() => {
+     console.log('Hello World');
+   }, 5000);
+   function printMessage() {
+     console.log('Hello World');
+   }
+   window.setInterval(printMessage, 5000);
+  ```
+
+All three calls to `setInterval()` cause the corresponding function to be executed every 5000 milliseconds.
+
+
+## Access navigation information on the current website
+
