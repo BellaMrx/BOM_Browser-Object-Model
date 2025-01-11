@@ -264,5 +264,21 @@ A URL consists of various components, a protocol, the host name, a port specific
 
 
 ### Access query string parameters
+Unfortunately, there is no method available for accessing the individual parameters in the query string of a URL. Instead, you have to parse the query string yourself or use a helper function. 
 
+Example of the helper function:
+
+ [Complete code - Part_7 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_7)
+ 
+  ```
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      const regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+        results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+    console.log(getParameterByName('tests'));
+  ```
+
+This function expects the name of the parameter for which the value is to be determined, creates a regular expression using this parameter and extracts the value (if available) for the parameter from the query string of the URL `location.search`.
 
