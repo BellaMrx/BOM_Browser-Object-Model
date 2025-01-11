@@ -237,4 +237,32 @@ All three calls to `setInterval()` cause the corresponding function to be execut
 
 
 ## Access navigation information on the current website
+The object stored in the `location` property can be used to access information about the URL that is currently loaded in the browser. 
+
+
+### Access the individual components of the URL
+A URL consists of various components, a protocol, the host name, a port specification, a path specification, query parameters and more.
+
+| Protocol  | Hostname       | Path           | Filename     | Querystring |
+| --------- | -------------- | -------------- | ------------ | ----------- |
+| https://  | launchfree.net | /BookOfCoding/ | example.html | search?keyword=javascript&output=list |
+
+#### The properties of **Location**
+| Property      | Description     |
+| ------------- | --------------- | 
+| `host` 		    | Contains the entire URL |
+| `protocol` 	  | Contains the protocol of the URL including the colon, e.g: `https:` |
+| `host` 		    | Contains the host name of a URL, for example `launchfree.net`. If there is a port input, this is also listed, for example `launchfree.net:6000`. |
+| `hostname` 	  | Contains the domain of a URL, for example `launchfree.net`. In contrast to the `host` property, `hostname` does not contain a port specification. |
+| `port` 		    | Contains the port of a URL, for example `7000`. |
+| `pathname` 	  | Contains the path of a URL, starting with a `/`.  |
+| `search` 		  | Contains the parameters of a URL. In other words, the **query string** including a preceding question mark `?`, for example `?keyword=javascript`. Several parameter-value pairs are separated by an ampersand symbol `&`, for example `?keyword=javascript&output=list`. |
+| `hash`	 	    | Contains the so-called **fragment identifier** including a preceding `#`, for example `#2-the-css-selectors` in `https://github.com/BellaMrx/CSS_Guide#2-the-css-selectors`. If you call up a URL with a fragment identifier and there is an element with the corresponding ID on the associated web page, the display area is scrolled to this element. |
+| `username` 	  | Contains the user name specified in the URL, for example the value `bella` for the URL `https://bella:secret@launchfree.net`. Not all browsers support this. |
+| `password` 	  | Contains the password specified in the URL, for example for the URL `https://bella:secret@launchfree.net` the value `secret`. Not all browsers support this. |
+| `origin` 		  | Contains the canonical form of the URL, consisting of protocol, followed by `://` and the domain and, if the URL contains a port specification, also a colon and the port specification. |
+
+
+### Access query string parameters
+
 
