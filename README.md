@@ -176,7 +176,7 @@ Example:
 
 This code has only been extended by a `linkClose` button, based on the previous example. The open browser window is noted in the event listener for the `linkOpen` button. Within the event listener for the `linkCClose` button, the `close()` method is called on this object, which closes the previously opened browser window.
 
-  <img src="images/BOM_Part_4.png" width="700">
+ <img src="images/BOM_Part_4.png" width="700">
 
 
 ### Further methods of the `window` object
@@ -281,4 +281,185 @@ Example of the helper function:
   ```
 
 This function expects the name of the parameter for which the value is to be determined, creates a regular expression using this parameter and extracts the value (if available) for the parameter from the query string of the URL `location.search`.
+
+
+### Load a new web page
+There are various ways to load a new web page in the current browser window.
+
+ - The `assign()` method expects a URL as an argument and opens the corresponding web page. At the same time, a new entry is created in the browser history:
+ 
+  ```
+   const linkLoad = document.getElementById('link-load');
+   linkLoad.addEventListener('click', (e) => {
+     const url = document.getElementById('url').value;
+     window.location.assign(url);
+   });
+  ```
+
+ <img src="images/BOM_Part_8.png" width="700">
+
+ [Complete code - Part_8 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_8)
+
+ - The `replace()` method works in the same way as the `assign()` method; the URL of the web page to be loaded is also passed as an argument to this method. In contrast to `assign()`, however, calling `replace()` does not result in a new entry being created in the browser history. In this case, it is therefore no longer possible to navigate back to the previously visited website:
+
+  ```
+   const linkLoad = document.getElementById('link-load');
+   linkLoad.addEventListener('click', (e) => {
+     const url = document.getElementById('url').value;
+     window.location.replace(url);
+   });
+  ```
+
+ [Complete code - Part_9 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_9)
+
+ - The `href` property of the `location` object can also be used to load a new web page:
+
+  ```
+   const linkLoad = document.getElementById('link-load');
+   linkLoad.addEventListener('click', (e) => {
+     const url = document.getElementById('url').value;
+     window.location.href = url;
+   });
+  ```
+
+ [Complete code - Part_10 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_10)
+
+ - If the current website is to be reloaded, this can be done using the `reload()` method. Optionally, a Boolean value can be passed to the method to determine whether the web page should be reloaded from the server (in this case, the value `true` is passed) or whether the browser can also reload the web page from its internal cache (in this case, the value `false` is passed):
+
+  ```
+   const linkReload = document.getElementById('link-reload');
+   linkReload.addEventListener('click', (e) => {
+     window.location.reload(true);
+   });
+  ```
+
+ [Complete code - Part_11 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_11)
+
+
+## Viewing and changing the browser history
+The `history` property of the `window` object takes you to an object that represents the browser history. This object can be used to view the history and also to change the history.
+
+
+### Navigate in the browser history
+Each time the browser loads a new web page, or also when a jump marker (anchor) is jumped to within a web page, the browser creates a new entry in the browser history by default (exception is the `replace()` method).
+
+#### Access to the browser history
+
+  ```
+   window.history.length;      // number of entries
+   window.history.back();      // back in the history
+   window.history.forward();   // forward in the history
+   window.history.go(-2);      // two entries back
+   window.history.go(2);       // two entries forward
+   window.history.go(0);       // reload current web page
+  ```
+
+ [Complete code - Part_12 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_12)
+
+
+#### Properties and methods of History (old but still valid)
+
+| Property/Method      | Description     |
+| -------------------- | --------------- | 
+| `length` | Contains the number of entries in the history including the currently loaded website. |
+| `back()` | Goes to the previous web page in the history. Does the same thing that happens when the user presses the browser's back button. |
+| `forward()` | Goes to the following website in the history. Does the same thing that happens when the user presses the browser's Next button. |
+| `go()` | Goes to a specific web page in the history. The method is passed the increment starting from the current website. The value `-1`, for example, ensures that the previous website is visited and the value `1` that the next website is visited. If a value is passed for which there is no corresponding website in the history, this method does nothing. If, on the other hand, the method is called without a value or with the value `0`, the current web page is reloaded.  |
+
+
+### Add entries to the browser history
+To add entries to the browser history, the `state` property and the two methods `pushState()` and `replaceState()` have been defined. The `state` property contains the current entry in the browser history, the `pushState()` method can be used to add a new entry to the history, the `replaceState()` method can be used to replace the current entry.
+
+Example:
+
+  ```
+   function init() {
+     // Container element for the content
+     const contentElement = document.getElementById('content');
+     // Example content, normally loaded via Ajax
+     const contents = {
+       home: {
+         content: 'Home'
+       },
+       services: {
+         content: 'Service'
+       },
+       settings: {
+         content: 'Settings'
+       },
+       aboutus: {
+         content: 'About Us'
+       },
+       contact: {
+         content: 'Contact'
+       }
+     };
+     // Event listener for the links
+     function handleClick(event) {
+       const pageName = event.target.getAttribute('href').split('/').pop();
+       const content = contents[pageName];
+       updateContent(content.content);
+       history.pushState(
+         content,                    // Status object
+         event.target.textContent,   // Title
+         event.target.href           // URL
+       );
+      return event.preventDefault();
+     }
+     // Register the event listeners
+     const linkElements = document.getElementsByTagName('a');
+     for (let i = 0; i < linkElements.length; i++) {
+       linkElements[i].addEventListener('click', handleClick, true);
+     }
+
+     function updateContent(content) {
+       contentElement.textContent = content;
+     }
+   }
+
+   document.addEventListener('DOMContentLoaded', init);
+  ```
+
+ [Complete code - Part_13 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_13)
+
+An event listener is registered here for each link, which calls the `pushState()` method and thus adds a new entry to the browser history. The first argument passed here is the content to be displayed, which for the sake of simplicity is contained in the `contents` object (in practice, the content would be loaded dynamically from the server).
+The title to be displayed in the title bar of the browser when the corresponding link is clicked is passed as the second parameter. The text content of the respective link element `event.target.textContent` is simply used for this. Finally, the URL to be displayed in the address bar is specified as the third parameter. Here again, the content of the `href` attribute of the corresponding link element `event.target.href` is used.
+Calling `preventDefault()` on the event object also prevents the default action from being executed when the links are clicked. If this call were omitted, the browser would simply reload the URL of the link.
+This code only works if the HTML is executed via a web server, but not if it is opened as a local file.
+
+
+### Respond to changes in the browser history
+
+  ```
+     window.addEventListener('popstate', (event) => {
+       updateContent(event.state.content);  
+   });
+  ```
+
+Each time the current entry in the browser history changes, the `popstate` event is triggered. However, the content of the website is not yet updated because the `updateContent()` method is only called when one of the links is clicked, but not when the back button is used.
+To achieve this and thus update the content of the `<main>` element when using the browser buttons, simply call the `updateContent()` method within an event listener for the `popstate` event.
+The event listener is passed an event object of the type `PopStateEvent`, whose `state` property is used to access the entry removed from the browser history. In the example, its `content` property is read and added to the container element for the content.
+
+ [Complete code - Part_13 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_13) - Continued explanation of the previous example
+
+
+### Replace the current entry in the browser history
+
+  ```
+   history.replaceState(
+     {
+       content: contentElement.textContent
+     },
+     document.title,
+     document.location.href
+   );
+  ```
+
+To replace the current entry in the browser history with another entry, the `replaceState()` method can be used. As with the `pushState()` method, the state object, the name and optionally a URL are passed to this method.
+
+ [Complete code - Part_13 - click here](https://github.com/BellaMrx/BOM_Browser-Object-Model/tree/main/BOM/Part_13) - Continued explanation of the previous example
+
+
+## Recognize browser and determine browser features
+
 
