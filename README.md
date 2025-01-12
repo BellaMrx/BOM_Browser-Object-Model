@@ -461,5 +461,61 @@ To replace the current entry in the browser history with another entry, the `rep
 
 
 ## Recognize browser and determine browser features
+If you want to access general browser information, such as browser name, browser manufacturer, use the `navigator` property of the `window` object.
 
+Properties of the `navigator` object:
+
+| Property     | Description     |
+| ------------ | --------------- | 
+| `appCodeName` | Contains the internal code name of the current browser (not reliable, as the value `Mozilla` is returned in every browser). |
+| `appName` | Contains the official name of the current browser (not reliable, as the value 'Netscape' is output in every browser). |
+| `appVersion` | Contains the version number of the current browser (not reliable). |
+| `battery` | Contains a reference to an object of type `BatteryManager`, which provides the entry point to the Battery Status API. |
+| `cookieEnabled` | Contains an indication of whether cookies are activated or not. |
+| `geolocation` | Contains a reference to an object of type 'Geolocation', which provides the entry point to the Geolocation API. |
+| `language` | Contains a character string that specifies the user's preferred language. As a rule, this is the language that is also used within the user interface of the respective browser. If no preferred language could be determined, this property contains the value `null`. |
+| `languages` | Contains a list of strings indicating the user's preferred languages, with the most preferred language in first position. |
+| `mimeTypes` | Contains a list of information on MIME types that are supported by the browser. |
+| `onLine` | Boolean information about whether the browser is connected to the Internet or not. |
+| `platform` | Contains information on the operating system used (not reliable). |
+| `plugins` | Contains a list of information about plug-ins that are not supported by the browser. |
+| `product` | Contains the product name of the current browser. However, for reasons of downward compatibility, the value `Gecko` is returned in every browser. |
+| `productSub` | Contains the sub-name of the current browser (one of the two values `20030107` and `20100101`). |
+| `serviceWorker` | Contains a reference to an object of type `ServiceWorkerContainer`, which provides the entry point to the Service Worker API. |
+| `userAgent` | Contains a character string that identifies the browser used. To be used with caution. |
+| `vendor` | Contains information on the browser manufacturer (one of the values `Apple Computer`, `Inc.` and `Google Inc.` or an empty character string). |
+| `vendorSub` | Actually intended for further information on the browser manufacturer, but always contains an empty character string. |
+
+Some of these properties should be treated with caution or are outdated and should therefore no longer be used.
+For example, the `navigator` object was still often used to draw conclusions about the browser used via the `userAgent` property in order to determine which features the corresponding browser supports and to execute certain JavaScript code depending on this. This technique is called **browser detection** or **browser sniffing**.
+Nowadays, however, browsers no longer use unique values for this property, so it is no longer possible to draw conclusions about the browser used.
+This is also the reason why browser detection technology is no longer used today to draw conclusions about which features are supported, but instead so-called **feature detection**, which searches directly for the features. This is because, as a web developer, it is generally not of interest which specific browser a user is using, but which features this browser supports.
+
+For example, it can be assumed that a browser supports the History API if the history object has a `pushState()` method. Feature detection** therefore directly tests whether certain JavaScript objects have certain properties or methods that are indicative of the corresponding feature. 
+
+  ```
+   if(window.history.pushState) {
+    // History API supported
+   } else {
+    // History API not supported
+   }
+  ```
+
+
+## Access information on the screen
+The object stored in the “screen” property (of type “screen”) contains information about the screen. This includes the height `height` and the width `width` of the screen, the color depth `colorDepth` as well as some information about how much space is available horizontally and vertically on the screen minus the fixed screen components (e.g. taskbars).
+
+Properties of the `screen` object:
+
+| Property     | Description     |
+| ------------ | --------------- | 
+| `availTop`   | Contains a pixel value that indicates how much space is taken up from above by fixed screen components such as taskbars etc., or contains exactly the pixel seen from above from which space is available for the browser window. |
+| `availLeft`  | Contains a pixel value that indicates how much space from the left is taken up by fixed screen components such as taskbars etc., or contains exactly the pixel from the left from which space is available for the browser window. |
+| `availHeight` | Contains the maximum available screen height in pixels minus the height of components such as taskbars etc. that are always displayed. |
+| `availWidth` | Contains the maximum available screen width in pixels minus the width of components such as taskbars etc. that are always displayed. |
+| `colorDepth` | Contains the color depth of the screen. |
+| `height` | Contains the height of the screen in pixels. |
+| `orientation` | Contains a reference to an object of type `ScreenOrientation`, which provides information on the orientation of the screen and is a component of the **Screen Orientation API**. |
+| `pixelDepth` | Contains the pixel depth of the screen. |
+| `width` | Contains the width of the screen in pixels. |
 
